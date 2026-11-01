@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusPlay - Ultimate Web Gaming Portal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="/assets/Gemini_Generated_Image_mbedknmbedknmbed.jpeg">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0b0c10',
+                        cardBg: '#1f2833',
+                        sidebarBg: '#0b0c10',
+                        accentRed: '#ff2a2a',
+                        accentGlow: '#ff4d4d',
+                        mutedGray: '#c5c6c7',
+                        creamText: '#ffffff',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #0b0c10;
+            color: #ffffff;
+        }
+
+        .glow-effect {
+            box-shadow: 0 0 25px rgba(255, 42, 42, 0.2);
+        }
+
+        .glow-effect:hover {
+            box-shadow: 0 0 35px rgba(255, 77, 77, 0.4);
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0b0c10;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #ff2a2a;
+            border-radius: 3px;
+        }
+    </style>
+    <link rel="stylesheet" href="streak.css">
+</head>
+
+<body class="bg-darkBg text-creamText min-h-screen flex flex-col selection:bg-accentRed selection:text-white">
+
+    <!-- Top Header Bar matching reference image layout -->
+    <header
+        class="h-20 bg-transparent absolute top-0 left-0 right-0 z-50 px-8 flex items-center justify-between border-b border-white/10 backdrop-blur-sm">
+        <!-- Left Navigation Links -->
+        <nav class="hidden md:flex items-center space-x-8 text-xs font-semibold tracking-widest text-mutedGray">
+            <a href="#" onclick="filterCategory('All')" class="hover:text-creamText transition-colors">HOME</a>
+            <a href="#" onclick="filterCategory('Action')" class="hover:text-creamText transition-colors">ABOUT</a>
+            <a href="#" onclick="filterCategory('Multiplayer')"
+                class="hover:text-creamText transition-colors">MISSIONS</a>
+        </nav>
+
+        <!-- Center Gaming Logo Monogram Badge -->
+        <div class="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center">
+            <div
+                class="px-4 py-2 bg-black/40 border border-white/20 rounded-xl flex items-center space-x-2 shadow-lg backdrop-blur-md">
+                <span class="font-extrabold text-sm tracking-wider text-creamText">NEXUS</span>
+                <span
+                    class="font-extrabold text-sm tracking-wider text-accentRed drop-shadow-[0_0_8px_rgba(255,42,42,0.8)]">PLAY</span>
+            </div>
+        </div>
+
+        <!-- Right Navigation Links & Profile -->
+        <div class="flex items-center space-x-8 text-xs font-semibold tracking-widest text-mutedGray">
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#" onclick="filterCategory('Casual')" class="hover:text-creamText transition-colors">ARMORY</a>
+                <a href="#" onclick="toggleFavoritesFilter()"
+                    class="hover:text-creamText transition-colors">FACTIONS</a>
+                <a href="#" onclick="openRandomPortal()"
+                    class="text-accentRed hover:text-accentGlow transition-colors">BUY NOW</a>
+            </nav>
+            <!-- <div class="flex items-center space-x-3 pl-4 border-l border-white/10">
+                <div
+                    class="w-8 h-8 rounded-full bg-gradient-to-tr from-accentRed to-rose-900 border border-white/20 flex items-center justify-center font-bold text-xs text-white shadow-md">
+                    JP
+                </div>
+            </div> -->
+            <!--Login-->
+
+
+            <button id="streakToggle" type="button" hidden aria-label="Open streak dashboard" class="nexus-streak-toggle"><i class="fa-solid fa-fire"></i><span id="navStreakCount">0</span></button>
+            <div id="userArea" class="flex items-center gap-3">
+                <a href="login.html" class="text-xs text-white font-bold hover:text-red-400">
+                    LOGIN
+                </a>
+                <a href="signup.html" class="bg-red-600 text-white px-4 py-2 rounded-lg text-xs font-bold">
+                    SIGN UP
+                </a>
+            </div>
+
+
+        </div>
+    </header>
+
+    <!-- Main Hero Cinematic Banner with Video Background -->
+    <div class="relative w-full h-[600px] sm:h-[680px] flex flex-col justify-end p-8 sm:p-16 overflow-hidden">
+        <!-- Background Gaming Video Element (Replace URL or keep default ambient anime/cyberpunk loop) -->
+        <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+            <video autoplay muted loop playsinline class="w-full h-full object-cover scale-105 opacity-80">
+                <source src="assets/186326-877653666.mp4" type="video/mp4">
+            </video>
+            <!-- Cinematic Vignette & Bottom Shadow Gradient Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0b0c10] via-[#0b0c10]/40 to-black/60"></div>
+        </div>
+
+        <!-- Hero Content Overlay -->
+        <div class="relative z-10 max-w-2xl space-y-4 mb-6">
+            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-creamText drop-shadow-lg leading-none">
+                YOUR ANIME<br>ODYSSEY<br>BEGINS HERE.
+            </h1>
+            <p class="text-mutedGray text-xs sm:text-sm max-w-lg leading-relaxed">
+                Immerse yourself in a playable anime world filled with deep lore, stunning cinematic visuals, and
+                unforgettable character-driven choices.
+            </p>
+            <div class="pt-3 flex items-center space-x-4">
+                <a href="https://www.mobilelegends.com/" target="_blank"
+                    class="bg-accentRed hover:bg-red-600 text-white font-bold text-xs px-6 py-3 rounded-xl shadow-lg shadow-accentRed/40 transition-all hover:scale-105 flex items-center space-x-2">
+                    <i class="fa-solid fa-play text-[10px]"></i><span>Play for Free</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Floating Character Card Previews (Matching reference aesthetic) -->
+        <div class="absolute right-8 bottom-12 hidden lg:flex items-center space-x-4 z-10">
+            <a href="https://www.crazygames.com/game/goddess-connect" target="_blank"
+                class="w-36 h-48 rounded-2xl overflow-hidden border border-white/20 shadow-2xl relative group cursor-pointer hover:border-accentRed transition-all">
+                <img src="/assets/kyraxys-ai-generated-8623750.png"
+                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <div
+                    class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-3">
+                    <span class="text-[11px] font-bold text-creamText tracking-wider">Goddes connect</span>
+                </div>
+            </a>
+
+            <!-- Second Card (Meira with Time Traveler link and local image) -->
+            <a href="https://hopefullight.itch.io/time-traveler" target="_blank"
+                class="w-36 h-48 rounded-2xl overflow-hidden border border-white/20 shadow-2xl relative group cursor-pointer hover:border-accentRed transition-all block">
+                <img src="/assets/mikeydred-ai-generated-8749148_1920.jpg"
+                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <div
+                    class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-3">
+                    <span class="text-[11px] font-bold text-creamText tracking-wider">DEATH LOOP</span>
+                </div>
+            </a>
+        </div>
+    </div>
+    </div>
+
+    <!-- Content Sections Area -->
+    <main class="flex-grow max-w-7xl mx-auto w-full p-6 sm:p-10 space-y-8">
+        <!-- Search & Filter Controls Bar -->
+        <div
+            class="flex flex-col sm:flex-row items-center justify-between gap-4 bg-cardBg/40 border border-white/10 p-4 rounded-2xl backdrop-blur-md">
+            <div class="flex items-center relative w-full sm:w-80">
+                <i class="fa-solid fa-magnifying-glass absolute left-3 text-mutedGray text-xs"></i>
+                <input type="text" id="searchInput" placeholder="Search games, tournaments..."
+                    class="w-full bg-black/40 border border-white/10 rounded-xl py-2 pl-9 pr-4 text-xs text-creamText placeholder-mutedGray focus:outline-none focus:border-accentRed transition-all"
+                    oninput="handleSearch(this.value)">
+            </div>
+            <div class="flex items-center space-x-3 w-full sm:w-auto justify-end">
+                <button onclick="toggleFavoritesFilter()" id="favoritesNavBtn"
+                    class="bg-black/40 hover:bg-black/60 border border-white/10 px-4 py-2 rounded-xl text-xs font-medium flex items-center space-x-2 transition-all">
+                    <i class="fa-solid fa-heart text-accentRed"></i>
+                    <span>Favorites</span>
+                    <span id="favoritesCount"
+                        class="bg-accentRed text-white text-[10px] px-1.5 py-0.2 rounded-full font-bold">0</span>
+                </button>
+                <select id="sortSelect" onchange="sortPortals(this.value)"
+                    class="bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-creamText focus:outline-none focus:border-accentRed">
+                    <option value="popular">Most Popular</option>
+                    <option value="rating">Highest Rated</option>
+                    <option value="name">Name (A-Z)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Section Title -->
+        <div class="flex items-center justify-between">
+            <h2 class="text-xl font-bold text-creamText tracking-wider">FEATURED GAME PORTALS</h2>
+            <span class="text-xs text-mutedGray">Explore Community Arenas</span>
+        </div>
+
+        <!-- Portals Grid -->
+        <div id="portalsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <!-- Dynamically Populated -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="hidden text-center py-16">
+            <i class="fa-solid fa-ghost text-3xl text-mutedGray mb-2"></i>
+            <h3 class="text-sm font-bold text-creamText">No portals found</h3>
+        </div>
+        <style>
+            .no-scrollbar::-webkit-scrollbar {
+                display: none;
+            }
+
+            .no-scrollbar {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+
+
+            .animate-marquee {
+                display: flex;
+                width: max-content;
+                animation: slowMarquee 45s linear infinite;
+            }
+
+            .animate-marquee:hover {
+                animation-play-state: paused;
+            }
+        </style>
+
+        <div class="bg-[#120708] text-white flex flex-col items-center justify-center overflow-x-hidden font-sans py-12">
+
+            <!-- Section Heading -->
+            <div class="w-full max-w-[1400px] px-8 mb-4 text-left">
+                <h2
+                    class="text-2xl md:text-3xl font-extrabold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-red-500 uppercase flex items-center gap-3">
+                    <span class="inline-block w-3 h-3 bg-red-600 rounded-full shadow-[0_0_10px_#ef4444]"></span>
+                    Most Popular Games
+                </h2>
+                <p class="text-xs md:text-sm text-gray-400 mt-1">Explore trending titles and join the action right now.
+                </p>
+            </div>
+
+            <!-- Main Carousel Wrapper -->
+            <div class="relative w-full max-w-[1400px] px-6 flex items-center justify-center">
+
+                <!-- Left Navigation Button -->
+                <button id="prevBtn"
+                    class="absolute left-2 md:left-6 z-30 w-12 h-12 rounded-full bg-[#240b0d] border border-red-950 flex items-center justify-center text-gray-400 hover:text-white hover:bg-red-600 hover:border-red-500 transition-all shadow-xl cursor-pointer">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                </button>
+
+                <!-- Carousel Track Wrapper with Marquee Container -->
+                <div id="carouselTrackContainer" class="overflow-x-auto no-scrollbar py-8 px-4 w-full scroll-smooth">
+
+                    <!-- Marquee track wrapping duplicated cards for infinite slow sliding -->
+                    <div id="carouselTrack" class="animate-marquee flex items-center gap-5">
+
+                        <!-- ORIGINAL SET OF CARDS -->
+                        <!-- Card 1 -->
+                        <a href="https://www.mobilelegends.com/"
+                            class="game-card flex-shrink-0 w-[240px] md:w-[260px] bg-[#1a0c0e] border border-red-950/80 rounded-2xl p-3.5 flex flex-col justify-between opacity-80 transition-all duration-300 cursor-pointer hover:border-red-600 hover:shadow-[0_0_30px_rgba(239,68,68,0.35)] hover:opacity-100 hover:scale-105">
+                            <div>
+                                <div class="flex items-center justify-between mb-3 text-[11px] text-gray-400">
+                                    <span
+                                        class="bg-[#2d1114] px-2.5 py-1 rounded-md flex items-center gap-1.5 font-medium">📅
+                                        OCT 07, 5:10 AM</span>
+                                </div>
+                                <div class="h-36 rounded-xl overflow-hidden mb-3.5 bg-gray-900">
+                                    <!-- ADD YOUR IMAGE PATH/URL BELOW -->
+                                    <img src="/assets/download.jpeg" alt="Apex Legends"
+                                        class="w-full h-full object-cover">
+                                </div>
+                                <span
+                                    class="inline-block bg-black/50 text-red-400 text-[11px] px-2.5 py-0.5 rounded-full mb-2 font-medium">●
+                                    Playing</span>
+                                <h3 class="font-semibold text-sm text-gray-200 truncate">Mobile Legends</h3>
+                            </div>
+                            <div
+                                class="flex items-center justify-between mt-5 pt-3 border-t border-red-950/60 text-xs text-gray-300">
+                                <span class="flex items-center gap-1">A thrilling 5v5 MOBA featuring strategic team
+                                    fights, diverse hero roles, and rapid-fire tactical combat.</span>
+                                <span class="flex items-center gap-1 text-red-400 font-semibold"></span>
+                            </div>
+                        </a>
+
+                        <!-- Card 2 -->
+                        <a href="https://pubg.com/en/main"
+                            class="game-card flex-shrink-0 w-[240px] md:w-[260px] bg-[#1a0c0e] border border-red-950/80 rounded-2xl p-3.5 flex flex-col justify-between opacity-80 transition-all duration-300 cursor-pointer hover:border-red-600 hover:shadow-[0_0_30px_rgba(239,68,68,0.35)] hover:opacity-100 hover:scale-105">
+                            <div>
+                                <div class="flex items-center justify-between mb-3 text-[11px] text-gray-400">
+                                    <span
+                                        class="bg-[#2d1114] px-2.5 py-1 rounded-md flex items-center gap-1.5 font-medium">📅
+                                        OCT 07, 5:10 AM</span>
+                                </div>
+                                <div class="h-36 rounded-xl overflow-hidden mb-3.5 bg-gray-900">
+                                    <!-- ADD YOUR IMAGE PATH/URL BELOW -->
+                                    <img src="/assets/images.jpeg" alt="Super Mario Odyssey"
+                                        class="w-full h-full object-cover">
+                                </div>
+                                <span
+                                    class="inline-block bg-black/50 text-red-400 text-[11px] px-2.5 py-0.5 rounded-full mb-2 font-medium">●
+                                    Playing</span>
+                                <h3 class="font-semibold text-sm text-gray-200 truncate">PUBG: Battlegrounds </h3>
+                            </div>
+                            <div
+                                class="flex items-center justify-between mt-5 pt-3 border-t border-red-950/60 text-xs text-gray-300">
+                                <span class="flex items-center gap-1">The original battle royale survival experience
+                                    where 100 players drop onto an island to scavenge, strategize, and fight to be the
+                                    last one standing</span>
+                                <span class="flex items-center gap-1 text-red-400 font-semibold"></span>
+                            </div>
+                        </a>
+
+                        <!-- Card 3 -->
+                        <a href="https://ff.garena.com/en"
+                            class="game-card flex-shrink-0 w-[240px] md:w-[260px] bg-[#1a0c0e] border border-red-950/80 rounded-2xl p-3.5 flex flex-col justify-between opacity-80 transition-all duration-300 cursor-pointer hover:border-red-600 hover:shadow-[0_0_30px_rgba(239,68,68,0.35)] hover:opacity-100 hover:scale-105">
+                            <div>
+                                <div class="flex items-center justify-between mb-3 text-[11px] text-gray-400">
+                                    <span
+                                        class="bg-[#2d1114] px-2.5 py-1 rounded-md flex items-center gap-1.5 font-medium">📅
+                                        OCT 07, 5:10 AM</span>
+                                </div>
+                                <div class="h-36 rounded-xl overflow-hidden mb-3.5 bg-gray-900">
+                                    <!-- ADD YOUR IMAGE PATH/URL BELOW -->
+                                    <img src="/assets/FREE FIRE.jpeg" alt="Ghost of Tsushima"
+                                        class="w-full h-full object-cover">
+                                </div>
+                                <span
+                                    class="inline-block bg-black/50 text-red-400 text-[11px] px-2.5 py-0.5 rounded-full mb-2 font-medium">●
+                                    Playing</span>
+                                <h3 class="font-semibold text-sm text-gray-200 truncate">Free Fire</h3>
+                            </div>
+                            <div
+                                class="flex items-center justify-between mt-5 pt-3 border-t border-red-950/60 text-xs text-gray-300">
+                                <span class="flex items-center gap-1">A fast-paced, high-octane 10-minute battle royale
+                                    designed for quick action with unique character abilities and intense
+                                    gunfights</span>
+                                <span class="flex items-center gap-1 text-red-400 font-semibold"></span>
+                            </div>
+                        </a>
+
+                        <!-- Card 4 -->
+                        <a href="https://www.callofduty.com/"
+                            class="game-card flex-shrink-0 w-[240px] md:w-[260px] bg-[#1a0c0e] border border-red-950/80 rounded-2xl p-3.5 flex flex-col justify-between opacity-80 transition-all duration-300 cursor-pointer hover:border-red-600 hover:shadow-[0_0_30px_rgba(239,68,68,0.35)] hover:opacity-100 hover:scale-105">
+                            <div>
+                                <div class="flex items-center justify-between mb-3 text-[11px] text-gray-400">
+                                    <span
+                                        class="bg-[#2d1114] px-2.5 py-1 rounded-md flex items-center gap-1.5 font-medium">📅
+                                        OCT 07, 5:10 AM</span>
+                                </div>
+                                <div class="h-36 rounded-xl overflow-hidden mb-3.5 bg-gray-900">
+                                    <!-- ADD YOUR IMAGE PATH/URL BELOW -->
+                                    <img src="/assets/call of duty.webp" alt="Copa Punto Gamer"
+                                        class="w-full h-full object-cover">
+                                </div>
+                                <span
+                                    class="inline-block bg-black/50 text-red-400 text-[11px] px-2.5 py-0.5 rounded-full mb-2 font-medium">●
+                                    Playing</span>
+                                <h3 class="font-semibold text-sm text-gray-200 truncate">Call of Duty</h3>
+                            </div>
+                            <div
+                                class="flex items-center justify-between mt-5 pt-3 border-t border-red-950/60 text-xs text-gray-300">
+                                <span class="flex items-center gap-1">A feature-packed shooter delivering iconic
+                                    multiplayer maps, smooth gunplay, and a massive battle royale mode on mobile</span>
+                                <span class="flex items-center gap-1 text-red-400 font-semibold"></span>
+                            </div>
+                        </a>
+
+                        <!-- Card 5 -->
+                        <a href="https://www.blood-strike.com/"
+                            class="game-card flex-shrink-0 w-[240px] md:w-[260px] bg-[#1a0c0e] border border-red-950/80 rounded-2xl p-3.5 flex flex-col justify-between opacity-80 transition-all duration-300 cursor-pointer hover:border-red-600 hover:shadow-[0_0_30px_rgba(239,68,68,0.35)] hover:opacity-100 hover:scale-105">
+                            <div>
+                                <div class="flex items-center justify-between mb-3 text-[11px] text-gray-400">
+                                    <span
+                                        class="bg-[#2d1114] px-2.5 py-1 rounded-md flex items-center gap-1.5 font-medium">📅
+                                        OCT 07, 5:10 AM</span>
+                                </div>
+                                <div class="h-36 rounded-xl overflow-hidden mb-3.5 bg-gray-900">
+                                    <!-- ADD YOUR IMAGE PATH/URL BELOW -->
+                                    <img src="/assets/blood strike.jpeg" alt="Cyber Legends"
+                                        class="w-full h-full object-cover">
+                                </div>
+                                <span
+                                    class="inline-block bg-black/50 text-red-400 text-[11px] px-2.5 py-0.5 rounded-full mb-2 font-medium">●
+                                    Playing</span>
+                                <h3 class="font-semibold text-sm text-gray-200 truncate">Blood Strike</h3>
+                            </div>
+                            <div
+                                class="flex items-center justify-between mt-5 pt-3 border-t border-red-950/60 text-xs text-gray-300">
+                                <span class="flex items-center gap-1">A fast-paced, lightweight battle royale featuring
+                                    unique characters with active and passive skills. It is well-optimized to run
+                                    smoothly even on lower-end phones with 2GB of RAM</span>
+                                <span class="flex items-center gap-1 text-red-400 font-semibold"></span>
+                            </div>
+                        </a>
+
+                        <!-- Card 6 -->
+                        <a href="https://farlight84.farlightgames.com/"
+                            class="game-card flex-shrink-0 w-[240px] md:w-[260px] bg-[#1a0c0e] border border-red-950/80 rounded-2xl p-3.5 flex flex-col justify-between opacity-80 transition-all duration-300 cursor-pointer hover:border-red-600 hover:shadow-[0_0_30px_rgba(239,68,68,0.35)] hover:opacity-100 hover:scale-105">
+                            <div>
+                                <div class="flex items-center justify-between mb-3 text-[11px] text-gray-400">
+                                    <span
+                                        class="bg-[#2d1114] px-2.5 py-1 rounded-md flex items-center gap-1.5 font-medium">📅
+                                        OCT 07, 5:10 AM</span>
+                                </div>
+                                <div class="h-36 rounded-xl overflow-hidden mb-3.5 bg-gray-900">
+                                    <!-- ADD YOUR IMAGE PATH/URL BELOW -->
+                                    <img src="/assets/Farlight 84.jpeg" alt="Valor Legends"
+                                        class="w-full h-full object-cover">
+                                </div>
+                                <span
+                                    class="inline-block bg-black/50 text-red-400 text-[11px] px-2.5 py-0.5 rounded-full mb-2 font-medium">●
+                                    Playing</span>
+                                <h3 class="font-semibold text-sm text-gray-200 truncate">Farlight 84</h3>
+                            </div>
+                            <div
+                                class="flex items-center justify-between mt-5 pt-3 border-t border-red-950/60 text-xs text-gray-300">
+                                <span class="flex items-center gap-1">A colorful, futuristic battle royale set in a
+                                    wasteland. It combines jetpacks, unique hero abilities, and vehicle combat for a
+                                    faster and more energetic match style</span>
+                                <span class="flex items-center gap-1 text-red-400 font-semibold"></span>
+                            </div>
+                        </a>
+
+                        <!-- Card 7 (Last Card) -->
+                        <a href="https://store.steampowered.com/app/2281730/Combat_Master_Season_5/"
+                            class="game-card flex-shrink-0 w-[240px] md:w-[260px] bg-[#1a0c0e] border border-red-950/80 rounded-2xl p-3.5 flex flex-col justify-between opacity-80 transition-all duration-300 cursor-pointer hover:border-red-600 hover:shadow-[0_0_30px_rgba(239,68,68,0.35)] hover:opacity-100 hover:scale-105">
+                            <div>
+                                <div class="flex items-center justify-between mb-3 text-[11px] text-gray-400">
+                                    <span
+                                        class="bg-[#2d1114] px-2.5 py-1 rounded-md flex items-center gap-1.5 font-medium">📅
+                                        OCT 07, 5:10 AM</span>
+                                </div>
+                                <div class="h-36 rounded-xl overflow-hidden mb-3.5 bg-gray-900">
+                                    <!-- ADD YOUR IMAGE PATH/URL BELOW -->
+                                    <img src="/assets/Combat Master.jpeg" alt="Apex Legends X"
+                                        class="w-full h-full object-cover">
+                                </div>
+                                <span
+                                    class="inline-block bg-black/50 text-red-400 text-[11px] px-2.5 py-0.5 rounded-full mb-2 font-medium">●
+                                    Playing</span>
+                                <h3 class="font-semibold text-sm text-gray-200 truncate">Combat Master</h3>
+                            </div>
+                            <div
+                                class="flex items-center justify-between mt-5 pt-3 border-t border-red-950/60 text-xs text-gray-300">
+                                <span class="flex items-center gap-1">A high-speed first-person shooter heavily praised
+                                    for its responsive movement, smooth gunplay, and offline play options. It offers a
+                                    close experience to traditional multiplayer military shooters</span>
+                                <span class="flex items-center gap-1 text-red-400 font-semibold"></span>
+                            </div>
+                        </a>
+
+
+                        <!-- DUPLICATED SET FOR SEAMLESS INFINITE LOOP MARQUEE -->
+                        <!-- Card 1 (Dup) -->
+                        <a href="https://newstate.pubg.com/en"
+                            class="game-card flex-shrink-0 w-[240px] md:w-[260px] bg-[#1a0c0e] border border-red-950/80 rounded-2xl p-3.5 flex flex-col justify-between opacity-80 transition-all duration-300 cursor-pointer hover:border-red-600 hover:shadow-[0_0_30px_rgba(239,68,68,0.35)] hover:opacity-100 hover:scale-105">
+                            <div>
+                                <div class="flex items-center justify-between mb-3 text-[11px] text-gray-400">
+                                    <span
+                                        class="bg-[#2d1114] px-2.5 py-1 rounded-md flex items-center gap-1.5 font-medium">📅
+                                        OCT 07, 5:10 AM</span>
+                                </div>
+                                <div class="h-36 rounded-xl overflow-hidden mb-3.5 bg-gray-900">
+                                    <img src="/assets/New State Mobile.jpeg" alt="Apex Legends"
+                                        class="w-full h-full object-cover">
+                                </div>
+                                <span
+                                    class="inline-block bg-black/50 text-red-400 text-[11px] px-2.5 py-0.5 rounded-full mb-2 font-medium">●
+                                    Playing</span>
+                                <h3 class="font-semibold text-sm text-gray-200 truncate">New State Mobile</h3>
+                            </div>
+                            <div
+                                class="flex items-center justify-between mt-5 pt-3 border-t border-red-950/60 text-xs text-gray-300">
+                                <span class="flex items-center gap-1">Developed by the creators of PUBG [0.5], this
+                                    futuristic battle royale takes place in the year 2051 [0.5]. It features advanced
+                                    drones, ballistic shields, futuristic vehicles, and expanded map mechanics</span>
+                                <span class="flex items-center gap-1 text-red-400 font-semibold"></span>
+                            </div>
+                        </a>
+
+                        <!-- Card 2 (Dup) -->
+                        <a href="https://wildrift.leagueoflegends.com/en-gb/"
+                            class="game-card flex-shrink-0 w-[240px] md:w-[260px] bg-[#1a0c0e] border border-red-950/80 rounded-2xl p-3.5 flex flex-col justify-between opacity-80 transition-all duration-300 cursor-pointer hover:border-red-600 hover:shadow-[0_0_30px_rgba(239,68,68,0.35)] hover:opacity-100 hover:scale-105">
+                            <div>
+                                <div class="flex items-center justify-between mb-3 text-[11px] text-gray-400">
+                                    <span
+                                        class="bg-[#2d1114] px-2.5 py-1 rounded-md flex items-center gap-1.5 font-medium">📅
+                                        OCT 07, 5:10 AM</span>
+                                </div>
+                                <div class="h-36 rounded-xl overflow-hidden mb-3.5 bg-gray-900">
+                                    <img src="/assets/League of Legends  Wild Rift.jpeg" alt="Super Mario Odyssey"
+                                        class="w-full h-full object-cover">
+                                </div>
+                                <span
+                                    class="inline-block bg-black/50 text-red-400 text-[11px] px-2.5 py-0.5 rounded-full mb-2 font-medium">●
+                                    Playing</span>
+                                <h3 class="font-semibold text-sm text-gray-200 truncate">League of Legends: Wild Rift
+                                </h3>
+                            </div>
+                            <div
+                                class="flex items-center justify-between mt-5 pt-3 border-t border-red-950/60 text-xs text-gray-300">
+                                <span class="flex items-center gap-1"> A polished, fast 5v5 MOBA built natively for
+                                    mobile devices. It offers deep tactical control, smooth dual-stick controls, and a
+                                    large roster of distinct champions.</span>
+                                <span class="flex items-center gap-1 text-red-400 font-semibold"></span>
+                            </div>
+                        </a>
+
+                        <!-- Card 3 (Dup) -->
+                        <a href="https://www.honorofkings.com/"
+                            class="game-card flex-shrink-0 w-[240px] md:w-[260px] bg-[#1a0c0e] border border-red-950/80 rounded-2xl p-3.5 flex flex-col justify-between opacity-80 transition-all duration-300 cursor-pointer hover:border-red-600 hover:shadow-[0_0_30px_rgba(239,68,68,0.35)] hover:opacity-100 hover:scale-105">
+                            <div>
+                                <div class="flex items-center justify-between mb-3 text-[11px] text-gray-400">
+                                    <span
+                                        class="bg-[#2d1114] px-2.5 py-1 rounded-md flex items-center gap-1.5 font-medium">📅
+                                        OCT 07, 5:10 AM</span>
+                                </div>
+                                <div class="h-36 rounded-xl overflow-hidden mb-3.5 bg-gray-900">
+                                    <img src="/assets/Honor of Kings.jpeg" alt="Ghost of Tsushima"
+                                        class="w-full h-full object-cover">
+                                </div>
+                                <span
+                                    class="inline-block bg-black/50 text-red-400 text-[11px] px-2.5 py-0.5 rounded-full mb-2 font-medium">●
+                                    Playing</span>
+                                <h3 class="font-semibold text-sm text-gray-200 truncate">Honor of Kings</h3>
+                            </div>
+                            <div
+                                class="flex items-center justify-between mt-5 pt-3 border-t border-red-950/60 text-xs text-gray-300">
+                                <span class="flex items-center gap-1">One of the most popular mobile MOBAs worldwide. It
+                                    features intense 5v5 team fights, short match lengths, and a vast collection of
+                                    mythological and historical heroes.</span>
+                                <span class="flex items-center gap-1 text-red-400 font-semibold"></span>
+                            </div>
+                        </a>
+
+                        <!-- Card 4 (Dup) -->
+                        <a href="https://unite.pokemon.com/en-us/"
+                            class="game-card flex-shrink-0 w-[240px] md:w-[260px] bg-[#1a0c0e] border border-red-950/80 rounded-2xl p-3.5 flex flex-col justify-between opacity-80 transition-all duration-300 cursor-pointer hover:border-red-600 hover:shadow-[0_0_30px_rgba(239,68,68,0.35)] hover:opacity-100 hover:scale-105">
+                            <div>
+                                <div class="flex items-center justify-between mb-3 text-[11px] text-gray-400">
+                                    <span
+                                        class="bg-[#2d1114] px-2.5 py-1 rounded-md flex items-center gap-1.5 font-medium">📅
+                                        OCT 07, 5:10 AM</span>
+                                </div>
+                                <div class="h-36 rounded-xl overflow-hidden mb-3.5 bg-gray-900">
+                                    <img src="/assets/Pokémon Unite.jpeg" alt="Copa Punto Gamer"
+                                        class="w-full h-full object-cover">
+                                </div>
+                                <span
+                                    class="inline-block bg-black/50 text-red-400 text-[11px] px-2.5 py-0.5 rounded-full mb-2 font-medium">●
+                                    Playing</span>
+                                <h3 class="font-semibold text-sm text-gray-200 truncate">Pokémon Unite</h3>
+                            </div>
+                            <div
+                                class="flex items-center justify-between mt-5 pt-3 border-t border-red-950/60 text-xs text-gray-300">
+                                <span class="flex items-center gap-1">A casual, fun 5v5 team battle game where you catch
+                                    and level up Pokémon while scoring points in objective-driven
+
+                                </span>
+                                <span class="flex items-center gap-1 text-red-400 font-semibold"></span>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+
+                <!-- Right Navigation Button -->
+                <button id="nextBtn"
+                    class="absolute right-2 md:right-6 z-30 w-12 h-12 rounded-full bg-red-600 border border-red-500 flex items-center justify-center text-white hover:bg-red-500 transition-all shadow-[0_0_15px_rgba(239,68,68,0.5)] cursor-pointer">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </button>
+
+            </div>
+
+            <!-- JavaScript for arrow navigation -->
+            <script>
+                const container = document.getElementById('carouselTrackContainer');
+                const prevBtn = document.getElementById('prevBtn');
+                const nextBtn = document.getElementById('nextBtn');
+
+                const scrollDistance = 280;
+
+                nextBtn.addEventListener('click', () => {
+                    container.scrollBy({ left: scrollDistance, behavior: 'smooth' });
+                });
+
+                prevBtn.addEventListener('click', () => {
+                    container.scrollBy({ left: -scrollDistance, behavior: 'smooth' });
+                });
+            </script>
+        </div>
+    </main>
+
+    <footer
+        class="w-full bg-[#120708] border-t border-red-950 text-gray-400 pt-0 pb-12 px-6 md:px-16 font-sans relative overflow-hidden">
+
+        <!-- UPPER FULL BANNER IMAGE SECTION (Overlapping/Background banner style) -->
+        <div
+            class="relative w-full max-w-[1400px] mx-auto h-[180px] md:h-[240px] rounded-xl overflow-hidden mb-8 border border-red-950 shadow-[0_10px_30px_rgba(0,0,0,0.8)] flex items-center justify-center">
+
+            <!-- Full-Width Background Banner Image -->
+            <img src="/assets/ccf.jpeg" alt="Full Banner"
+                class="absolute inset-0 w-full h-full object-cover object-center opacity-70">
+
+            <!-- Dark Overlay Gradient for text readability -->
+            <div class="absolute inset-0 bg-gradient-to-t from-[#120708] via-[#120708]/60 to-transparent"></div>
+
+            <!-- Center Content over Banner -->
+            <div class="relative z-20 flex flex-col items-center justify-center text-center gap-3 px-4">
+                <h2
+                    class="text-2xl md:text-4xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-400 to-red-600 uppercase drop-shadow-[0_2px_15px_rgba(239,68,68,0.7)]">
+                    NEXUS PLAY
+                </h2>
+                <p class="text-xs md:text-sm text-gray-300 max-w-md font-medium">
+                    Experience the ultimate battle. Download now and join millions of players worldwide.
+                </p>
+                <a href="https://play.google.com/store/apps/details?id=com.dts.freefireth&pcampaignid=web_share"
+                    class="mt-1 bg-red-600 hover:bg-red-500 text-white font-bold text-xs md:text-sm tracking-wider uppercase px-8 py-3 rounded-lg shadow-[0_0_20px_rgba(239,68,68,0.6)] transition-all">
+                    DOWNLOAD NOW
+                </a>
+            </div>
+
+        </div>
+
+        <!-- MAIN FOOTER CONTENT -->
+        <div
+            class="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-10 pt-6 border-t border-red-950/60">
+
+            <!-- Left: Navigation Links -->
+            <div class="flex flex-wrap items-center gap-6 md:gap-10 text-sm font-medium tracking-wide">
+                <a href="#trailer" class="hover:text-red-400 transition-colors">Trailer</a>
+                <a href="#gamehub" class="hover:text-red-400 transition-colors">Gamehub</a>
+                <a href="#modes" class="hover:text-red-400 transition-colors">Modes</a>
+                <a href="#weapons" class="hover:text-red-400 transition-colors">Weapons</a>
+                <a href="#media" class="hover:text-red-400 transition-colors">Media</a>
+            </div>
+
+            <!-- Right: Social Media Icons -->
+            <div class="flex flex-col items-start md:items-end gap-3 w-full md:w-auto">
+                <span class="text-xs font-bold tracking-widest text-gray-300 uppercase">JOIN THE CONVERSATION</span>
+                <div class="flex items-center gap-4 text-gray-300">
+                    <!-- Twitter / X -->
+                    <a href="#" aria-label="Twitter"
+                        class="w-9 h-9 rounded-full bg-[#1a0c0e] border border-red-950 flex items-center justify-center hover:bg-red-600 hover:text-white hover:border-red-500 transition-all">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                            <path
+                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg>
+                    </a>
+                    <!-- Instagram -->
+                    <a href="#" aria-label="Instagram"
+                        class="w-9 h-9 rounded-full bg-[#1a0c0e] border border-red-950 flex items-center justify-center hover:bg-red-600 hover:text-white hover:border-red-500 transition-all">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                        </svg>
+                    </a>
+                    <!-- Facebook -->
+                    <a href="#" aria-label="Facebook"
+                        class="w-9 h-9 rounded-full bg-[#1a0c0e] border border-red-950 flex items-center justify-center hover:bg-red-600 hover:text-white hover:border-red-500 transition-all">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                            <path
+                                d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.37 14.5 5 15.5 5H18V0h-3.808C10.59 0 9 1.588 9 4.71V8z" />
+                        </svg>
+                    </a>
+                    <!-- YouTube -->
+                    <a href="#" aria-label="YouTube"
+                        class="w-9 h-9 rounded-full bg-[#1a0c0e] border border-red-950 flex items-center justify-center hover:bg-red-600 hover:text-white hover:border-red-500 transition-all">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                            <path
+                                d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                        </svg>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Divider Line -->
+        <div class="max-w-[1400px] mx-auto border-t border-red-950/60 my-6"></div>
+
+        <!-- Bottom Section: Newsletter & Copyright -->
+        <div class="max-w-[1400px] mx-auto flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+
+            <!-- Newsletter Signup Form -->
+            <form class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full lg:w-auto">
+                <div class="relative flex-1 sm:w-[320px]">
+                    <input type="email" placeholder="Type your email.." required
+                        class="w-full bg-[#1a0c0e] border border-red-950 rounded-lg px-4 py-3 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-red-500 transition-colors">
+                </div>
+                <button type="submit"
+                    class="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-medium text-sm px-6 py-3 rounded-lg transition-all shadow-[0_0_15px_rgba(239,68,68,0.4)] cursor-pointer">
+                    Send
+                </button>
+            </form>
+
+
+            <div
+                class="flex flex-col md:flex-row items-start md:items-center gap-6 text-xs text-gray-500 w-full lg:w-auto justify-between lg:justify-end">
+                <label class="flex items-center gap-2.5 cursor-pointer select-none">
+                    <input type="checkbox" required
+                        class="w-4 h-4 rounded bg-[#1a0c0e] border border-red-950 text-red-600 focus:ring-0 cursor-pointer">
+                    <span class="text-gray-400">I agree to receive emails and news about these game.</span>
+                </label>
+            </div>
+
+        </div>
+
+
+        <div class="max-w-[1400px] mx-auto pt-4 border-t border-red-950/40 text-center text-xs text-gray-500">
+            <p>© 2026 NEXUS PLAY. All rights reserved.</p>
+        </div>
+        </div>
+    </footer>
+
+    <!-- Preview Modal -->
+    <div id="previewModal"
+        class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4 animate-fadeIn">
+        <div
+            class="bg-cardBg border border-white/20 w-full max-w-4xl h-[85vh] rounded-2xl flex flex-col shadow-2xl overflow-hidden glow-effect">
+            <div class="bg-black/40 px-4 py-3 flex items-center justify-between border-b border-white/10">
+                <div class="flex items-center space-x-2">
+                    <div id="modalLogoBg"
+                        class="w-8 h-8 rounded-lg bg-accentRed flex items-center justify-center text-white text-sm shadow-md">
+                        <i id="modalLogoIcon" class="fa-solid fa-gamepad"></i>
+                    </div>
+                    <div>
+                        <h3 id="modalTitle" class="font-bold text-sm text-creamText">Portal Name</h3>
+                        <p id="modalCategory" class="text-[10px] text-mutedGray">Category</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button id="modalExternalBtn" onclick="openExternalLink()"
+                        class="bg-black/40 hover:bg-black/60 text-creamText px-3 py-1.5 rounded-lg text-xs font-semibold border border-white/10">
+                        <i class="fa-solid fa-external-link-alt text-accentRed mr-1"></i> Open Tab
+                    </button>
+                    <button onclick="closePreviewModal()"
+                        class="w-8 h-8 rounded-lg bg-black/40 hover:bg-accentRed text-creamText flex items-center justify-center border border-white/10 transition-all">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="relative flex-grow bg-black flex flex-col items-center justify-center">
+                <div id="embedBlockNotice"
+                    class="absolute inset-0 bg-darkBg/95 z-20 flex flex-col items-center justify-center p-6 text-center">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-accentRed/20 border border-accentRed/40 text-accentRed flex items-center justify-center text-xl mb-3">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h4 class="text-base font-bold text-creamText mb-1">Direct Secure Portal Link</h4>
+                    <p class="text-mutedGray text-xs max-w-sm mb-4">Major gaming hubs require opening directly in their
+                        official playground window for anti-cheat and smooth performance.</p>
+                    <a id="directLaunchBtn" href="#" target="_blank"
+                        class="bg-accentRed hover:bg-red-600 text-white font-semibold px-5 py-2.5 rounded-xl text-xs shadow-lg shadow-accentRed/40 transition-all">
+                        Launch Official Site
+                    </a>
+                </div>
+                <iframe id="portalIframe" src="" class="w-full h-full border-0 hidden"
+                    sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Streak dashboard overlay -->
+    <div id="streakOverlay" class="nexus-streak-overlay" hidden>
+      <section class="nexus-streak-panel" role="dialog" aria-modal="true" aria-labelledby="streakHeading">
+        <div class="nexus-streak-head">
+          <div><p class="nexus-streak-eyebrow">NEXUSPLAY / PLAYER REWARDS</p><h2 id="streakHeading">YOUR <span>STREAK</span></h2></div>
+          <button id="streakClose" type="button" aria-label="Close streak dashboard"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="nexus-streak-hero"><i class="fa-solid fa-fire"></i><strong><span id="streakCurrent">0</span> DAYS</strong><p id="streakMessage">Launch a game to ignite your streak.</p></div>
+        <div class="nexus-streak-stats"><div><span>CURRENT STREAK</span><strong id="streakCurrentSmall">0</strong></div><div><span>PERSONAL BEST</span><strong id="streakBest">0</strong></div></div>
+        <h3>THIS WEEK <span>MON — SUN</span></h3><div id="streakWeek" class="nexus-streak-week"></div>
+        <h3>STREAK MILESTONES</h3><div id="streakMilestones" class="nexus-streak-milestones"></div>
+        <p id="streakError" class="nexus-streak-error" role="status"></p>
+        <p class="nexus-streak-footnote">One tracked game launch per day counts toward your streak (Pakistan time). External gameplay itself cannot be verified.</p>
+      </section>
+    </div>
+
+    <!-- JavaScript Data & Logic -->
+    <script>
+        const portals = [
+            { id: 1, name: "Poki", category: "Casual", url: "https://poki.com", rating: "4.9", players: "45.2K active", description: "Top web platform featuring thousands of free online games.", icon: "fa-gamepad", color: "from-accentRed to-rose-950", embeddable: false },
+            { id: 2, name: "CrazyGames", category: "Action", url: "https://www.crazygames.com", rating: "4.8", players: "38.9K active", description: "Awesome 3D multiplayer action games and shooters.", icon: "fa-bolt", color: "from-rose-600 to-[#1f2833]", embeddable: false },
+            { id: 3, name: "Roblox", category: "Multiplayer", url: "https://www.roblox.com", rating: "4.9", players: "89.4K active", description: "Immersive virtual universe and multiplayer worlds.", icon: "fa-cube", color: "from-accentRed to-red-900", embeddable: false },
+            { id: 4, name: "Itch.io", category: "Indie", url: "https://itch.io/games/free", rating: "4.7", players: "12.1K active", description: "Open indie marketplace and retro game developer community.", icon: "fa-chess-rook", color: "from-[#1f2833] to-accentRed", embeddable: false },
+            { id: 5, name: "Y8 Arcade", category: "Casual", url: "https://www.y8.com", rating: "4.5", players: "15.3K active", description: "Classic arcade catalog with high score challenges.", icon: "fa-ghost", color: "from-accentRed to-[#0b0c10]", embeddable: false },
+            { id: 6, name: "Armor Games", category: "Action", url: "https://armorgames.com", rating: "4.6", players: "9.8K active", description: "Legendary destination for free strategy and RPG adventure.", icon: "fa-shield-halved", color: "from-[#1f2833] to-accentRed", embeddable: false },
+            { id: 7, name: "Kizi Games", category: "Casual", url: "https://kizi.com", rating: "4.4", players: "14.1K active", description: "Fun browser mini-games, puzzles, and kids adventures.", icon: "fa-puzzle-piece", color: "from-accentRed to-[#1f2833]", embeddable: false },
+            { id: 8, name: "GameDistribution", category: "Multiplayer", url: "https://gamedistribution.com", rating: "4.8", players: "22.0K active", description: "Massive catalog of browser-ready HTML5 games.", icon: "fa-globe", color: "from-rose-700 to-[#1f2833]", embeddable: false }
+        ];
+
+        let currentFilter = 'All';
+        let currentSearchQuery = '';
+        let showOnlyFavorites = false;
+        let activePortal = null;
+        let favorites = JSON.parse(localStorage.getItem('nexus_favorites')) || [];
+
+        function renderPortals() {
+            const grid = document.getElementById('portalsGrid');
+            const emptyState = document.getElementById('emptyState');
+            grid.innerHTML = '';
+
+            let filtered = portals.filter(portal => {
+                const matchesCategory = currentFilter === 'All' || portal.category === currentFilter;
+                const matchesSearch = portal.name.toLowerCase().includes(currentSearchQuery.toLowerCase()) ||
+                    portal.description.toLowerCase().includes(currentSearchQuery.toLowerCase());
+                const matchesFavorites = !showOnlyFavorites || favorites.includes(portal.id);
+                return matchesCategory && matchesSearch && matchesFavorites;
+            });
+
+            updateFavoritesCount();
+
+            if (filtered.length === 0) {
+                emptyState.classList.remove('hidden');
+                return;
+            } else {
+                emptyState.classList.add('hidden');
+            }
+
+            filtered.forEach(portal => {
+                const isFav = favorites.includes(portal.id);
+                const card = document.createElement('div');
+                card.className = "bg-cardBg/60 border border-white/10 hover:border-accentRed rounded-2xl p-5 flex flex-col justify-between transition-all duration-300 glow-effect backdrop-blur-md group";
+
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="bg-black/40 text-mutedGray border border-white/10 text-[10px] font-medium px-2.5 py-0.5 rounded-full">
+                                ${portal.category}
+                            </span>
+                            <button onclick="event.stopPropagation(); toggleFavorite(${portal.id})" class="w-8 h-8 rounded-lg bg-black/40 hover:bg-black/60 text-mutedGray flex items-center justify-center transition-all border border-white/10">
+                                <i class="fa-solid fa-heart text-xs ${isFav ? 'text-accentRed' : 'text-mutedGray'}"></i>
+                            </button>
+                        </div>
+                        <div class="flex items-center space-x-3 mb-3">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-tr ${portal.color} flex items-center justify-center text-white text-xl shadow-md border border-white/10">
+                                <i class="fa-solid ${portal.icon}"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-base text-creamText group-hover:text-red-400 transition-colors">${portal.name}</h3>
+                                <div class="flex items-center space-x-2 text-[11px] text-mutedGray mt-0.5">
+                                    <span class="text-amber-400 font-semibold"><i class="fa-solid fa-star text-[10px]"></i> ${portal.rating}</span>
+                                    <span>•</span>
+                                    <span class="text-emerald-400">${portal.players}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-mutedGray text-xs line-clamp-2 mb-4">${portal.description}</p>
+                    </div>
+                    <div class="pt-3 border-t border-white/10 flex items-center space-x-2">
+                        <button onclick="openPreviewModal(${portal.id})" class="flex-grow bg-black/40 hover:bg-accentRed text-creamText hover:text-white font-semibold py-2 px-3 rounded-xl text-xs transition-all flex items-center justify-center space-x-2 border border-white/10">
+                            <i class="fa-solid fa-play text-[10px] text-accentRed group-hover:text-white"></i>
+                            <span>Quick Play</span>
+                        </button>
+                        <a href="${portal.url}" target="_blank" onclick="event.stopPropagation()" class="w-9 h-9 rounded-xl bg-black/40 hover:bg-black/60 border border-white/10 flex items-center justify-center text-mutedGray hover:text-creamText" title="Open in new window">
+                            <i class="fa-solid fa-external-link text-[10px]"></i>
+                        </a>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterCategory(cat) {
+            currentFilter = cat;
+            showOnlyFavorites = false;
+            document.getElementById('favoritesNavBtn').classList.remove('border-accentRed', 'bg-accentRed/20');
+            renderPortals();
+        }
+
+        function handleSearch(query) {
+            currentSearchQuery = query;
+            renderPortals();
+        }
+
+        function toggleFavoritesFilter() {
+            showOnlyFavorites = !showOnlyFavorites;
+            const favNav = document.getElementById('favoritesNavBtn');
+            if (showOnlyFavorites) {
+                favNav.classList.add('border-accentRed', 'bg-accentRed/20');
+            } else {
+                favNav.classList.remove('border-accentRed', 'bg-accentRed/20');
+            }
+            renderPortals();
+        }
+
+        function toggleFavorite(id) {
+            if (favorites.includes(id)) {
+                favorites = favorites.filter(favId => favId !== id);
+            } else {
+                favorites.push(id);
+            }
+            localStorage.setItem('nexus_favorites', JSON.stringify(favorites));
+            renderPortals();
+        }
+
+        function updateFavoritesCount() {
+            document.getElementById('favoritesCount').innerText = favorites.length;
+        }
+
+        function sortPortals(criterion) {
+            if (criterion === 'popular') {
+                portals.sort((a, b) => parseFloat(b.players) - parseFloat(a.players));
+            } else if (criterion === 'rating') {
+                portals.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating));
+            } else if (criterion === 'name') {
+                portals.sort((a, b) => a.name.localeCompare(b.name));
+            }
+            renderPortals();
+        }
+
+        function openRandomPortal() {
+            const randomIndex = Math.floor(Math.random() * portals.length);
+            openPreviewModal(portals[randomIndex].id);
+        }
+
+        function openPreviewModal(id) {
+            activePortal = portals.find(p => p.id === id);
+            if (!activePortal) return;
+
+            document.getElementById('modalTitle').innerText = activePortal.name;
+            document.getElementById('modalCategory').innerText = `${activePortal.category} • Rating ${activePortal.rating}`;
+            document.getElementById('directLaunchBtn').href = activePortal.url;
+
+            const logoBg = document.getElementById('modalLogoBg');
+            logoBg.className = `w-8 h-8 rounded-lg bg-gradient-to-tr ${activePortal.color} flex items-center justify-center text-white text-sm`;
+            document.getElementById('modalLogoIcon').className = `fa-solid ${activePortal.icon}`;
+
+            const iframe = document.getElementById('portalIframe');
+            const notice = document.getElementById('embedBlockNotice');
+
+            if (activePortal.embeddable) {
+                notice.classList.add('hidden');
+                iframe.classList.remove('hidden');
+                iframe.src = activePortal.url;
+            } else {
+                notice.classList.remove('hidden');
+                iframe.classList.add('hidden');
+                iframe.src = '';
+            }
+
+            document.getElementById('previewModal').classList.remove('hidden');
+            document.getElementById('previewModal').classList.add('flex');
+        }
+
+        function closePreviewModal() {
+            document.getElementById('portalIframe').src = '';
+            document.getElementById('previewModal').classList.remove('flex');
+            document.getElementById('previewModal').classList.add('hidden');
+        }
+
+        function openExternalLink() {
+            if (activePortal) window.open(activePortal.url, '_blank');
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderPortals();
+        });
+    </script>
+    <!--Supabase-->
+
+    <script type="module">
+        import { supabase } from "./supabase-config.js";
+
+        const userArea = document.getElementById("userArea");
+
+        async function updateNavbar() {
+            const { data: { user } } = await supabase.auth.getUser();
+
+            if (!user) return;
+
+            const { data: profile } = await supabase
+                .from("profiles")
+                .select("username")
+                .eq("id", user.id)
+                .single();
+
+            const username =
+                profile?.username || user.user_metadata?.username || "Player";
+
+            userArea.innerHTML = "";
+
+            const name = document.createElement("span");
+            name.className = "text-xs text-white font-bold";
+            name.textContent = username;
+
+            const logout = document.createElement("button");
+            logout.className =
+                "bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg text-xs font-bold";
+            logout.textContent = "LOGOUT";
+
+            logout.onclick = async () => {
+                const { error } = await supabase.auth.signOut();
+
+                if (error) {
+                    alert(error.message);
+                    return;
+                }
+
+                window.location.href = "login.html";
+            };
+
+            userArea.append(name, logout);
+        }
+
+        updateNavbar();
+    </script>
+
+
+
+    <script type="module" src="streak.js"></script>
+</body>
+
+</html>

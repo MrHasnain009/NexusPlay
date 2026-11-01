@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NexusPlay - Supabase Test</title>
+</head>
+<body style="background:#0b0c10;color:white;font-family:Arial;padding:40px">
+
+  <h2>NexusPlay Supabase Connection</h2>
+  <p id="status">Checking connection...</p>
+
+  <script type="module">
+    import { supabase } from "./supabase-config.js";
+
+    async function testConnection() {
+      const status = document.getElementById("status");
+
+      try {
+        const { data, error } = await supabase.auth.getSession();
+
+        if (error) throw error;
+
+        status.textContent =
+          "Supabase client initialized successfully!";
+        status.style.color = "#22c55e";
+
+        console.log("Session:", data.session);
+      } catch (error) {
+        status.textContent = "Connection error: " + error.message;
+        status.style.color = "#ef4444";
+        console.error(error);
+      }
+    }
+
+    testConnection();
+  </script>
+</body>
+</html>

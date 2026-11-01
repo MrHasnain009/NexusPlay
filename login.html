@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login | NexusPlay</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: #0b0c10;
+      color: white;
+    }
+
+    .auth-panel {
+      background: #15171d;
+      border: 1px solid #342026;
+    }
+
+    .field {
+      background: #0b0c10;
+      border: 1px solid #353740;
+      transition: .2s;
+    }
+
+    .field:focus-within {
+      border-color: #ff2a2a;
+      box-shadow: 0 0 0 3px rgba(255, 42, 42, .08);
+    }
+
+    input {
+      background: transparent;
+      outline: none;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen">
+
+  <header class="h-20 border-b border-white/10 flex items-center justify-between px-6 md:px-12">
+    <a href="index.html" class="text-xl font-black tracking-widest">
+      NEXUS<span class="text-[#ff2a2a]">PLAY</span>
+    </a>
+    <a href="index.html" class="text-xs text-gray-400 hover:text-white">
+      <i class="fa-solid fa-arrow-left mr-2"></i> BACK TO ARENA
+    </a>
+  </header>
+
+  <main class="min-h-[calc(100vh-80px)] flex items-center justify-center px-5 py-12">
+    <div class="w-full max-w-md">
+
+      <div class="flex items-center gap-3 mb-7">
+        <div class="w-12 h-12 bg-red-950/50 border border-red-900 rounded-xl flex items-center justify-center">
+          <i class="fa-solid fa-gamepad text-red-500 text-xl"></i>
+        </div>
+        <div>
+          <p class="text-[10px] tracking-[.3em] text-red-500 font-bold">PLAYER ACCESS</p>
+          <h1 class="text-3xl font-black tracking-tight">WELCOME BACK.</h1>
+        </div>
+      </div>
+
+      <div class="auth-panel rounded-2xl p-7 md:p-9 shadow-2xl">
+        <p class="text-gray-400 text-sm mb-7">Your next gaming session starts here.</p>
+
+        <form id="loginForm" class="space-y-5">
+          <div>
+            <label class="block text-xs font-bold tracking-widest text-gray-300 mb-2">EMAIL ADDRESS</label>
+            <div class="field rounded-lg flex items-center gap-3 px-4 py-3.5">
+              <i class="fa-regular fa-envelope text-gray-500"></i>
+              <input id="email" type="email" placeholder="player@example.com" required autocomplete="email">
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <label class="text-xs font-bold tracking-widest text-gray-300">PASSWORD</label>
+              <button type="button" id="forgotPassword" class="text-xs text-red-400 hover:text-red-300">Forgot
+                password?</button>
+            </div>
+            <div class="field rounded-lg flex items-center gap-3 px-4 py-3.5">
+              <i class="fa-solid fa-lock text-gray-500"></i>
+              <input id="password" type="password" placeholder="Enter password" required
+                autocomplete="current-password">
+              <button type="button" id="togglePassword" aria-label="Show password">
+                <i class="fa-regular fa-eye text-gray-500"></i>
+              </button>
+            </div>
+          </div>
+
+          <p id="message" role="status" class="text-sm hidden"></p>
+
+          <button id="submitBtn" type="submit"
+            class="w-full bg-[#ff2a2a] hover:bg-red-600 transition py-3.5 rounded-lg text-sm font-extrabold tracking-widest">
+            <i class="fa-solid fa-right-to-bracket mr-2"></i> ENTER THE ARENA
+          </button>
+        </form>
+
+        <div class="flex items-center gap-4 my-7">
+          <div class="h-px bg-white/10 flex-1"></div>
+          <span class="text-xs text-gray-500">NEW PLAYER?</span>
+          <div class="h-px bg-white/10 flex-1"></div>
+        </div>
+
+        <a href="signup.html"
+          class="block text-center border border-red-900 hover:border-red-500 rounded-lg py-3 text-sm font-bold transition">
+          CREATE YOUR ACCOUNT
+        </a>
+      </div>
+
+      <p class="text-center text-gray-600 text-xs mt-7">© 2026 NEXUSPLAY. ALL RIGHTS RESERVED.</p>
+    </div>
+  </main>
+
+  <script type="module">
+
+    import { supabase } from "./supabase-config.js";
+    import { showMessage, togglePassword } from "./auth.js";
+
+    const form = document.getElementById("loginForm");
+    const button = document.getElementById("submitBtn");
+
+    document.getElementById("togglePassword").onclick = () => {
+      togglePassword("password");
+    };
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      button.disabled = true;
+      button.textContent = "AUTHENTICATING...";
+
+      try {
+        const { data, error } =
+          await supabase.auth.signInWithPassword({
+            email,
+            password
+          });
+
+        if (error) throw error;
+
+        if (data.user) {
+          window.location.href = "index.html";
+        }
+      } catch (error) {
+        showMessage(error.message, true);
+      } finally {
+        button.disabled = false;
+        button.textContent = "ENTER THE ARENA";
+      }
+    });
+
+    // Forgot password
+    document.getElementById("forgotPassword").onclick = async () => {
+      const email = document.getElementById("email").value.trim();
+
+      if (!email) {
+        showMessage("Enter your email address first.", true);
+        return;
+      }
+
+      const { error } = await supabase.auth.resetPasswordForEmail(
+        email,
+        {
+          redirectTo: new URL(
+            "reset-password.html",
+            window.location.href
+          ).href
+        }
+      );
+
+      showMessage(
+        error
+          ? error.message
+          : "Check your email for reset instructions.",
+        !!error
+      );
+    };
+  </script>
+</body>
+
+</html>
